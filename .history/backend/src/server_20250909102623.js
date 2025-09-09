@@ -16,26 +16,15 @@ console.log(process.env.MONGO_URI);
 
 
 //middlewear
-if(process.env.NODE_ENV!=="production"){
 app.use(cors({
     origin: "http://localhost:5173",
 }));
-
-}
 app.use(express.json());//this middlewear parse json bodies: req.body
 app.use(rateLimiter);
 
 
 app.use("/api/notes",notesRoutes);
-
-if(process.env.NODE_ENV==="production"){
-    app.use(express.static(path.join(__dirname,"../frontend/dist")));
-app.get("*",(req,res)=>{
-    res.sendFile(path.join(__dirname,"../frontend/dist/index.html"));
-});
-}
-
-
+app.use(express.static(path.join(__dirname,"../frontend/dist")));
 
 connectDB().then(()=>{
     app.listen(PORT,()=>{

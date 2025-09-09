@@ -1,6 +1,7 @@
 import { PenSquareIcon, Trash2, Trash2Icon } from 'lucide-react';
 import React from 'react'
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 import toast from 'react-hot-toast'; 
 import api from '../lib/axios.js';
 
